@@ -1,1 +1,8 @@
 streamlit
+pandas
+requests
+plotly==5.9.0
+numpy
+scikit-learn
+tensorflow==2.12.0
+kaleido
