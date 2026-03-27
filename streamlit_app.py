@@ -1,6 +1,7 @@
 import streamlit as st
+import firebase_admin
+from firebase_admin import credentials
 
-st.title("🎈 My new app")
-st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
-)
+if not firebase_admin._apps:
+    cred = credentials.Certificate(dict(st.secrets["firebase"]))
+    firebase_admin.initialize_app(cred)
