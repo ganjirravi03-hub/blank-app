@@ -1,9 +1,10 @@
+
 import streamlit as st
 import pandas as pd
-import openai
+from openai import OpenAI
 
-# 🔑 API Key (yaha apni key daal)
-openai.api_key = "YOUR_OPENAI_API_KEY"
+# ✅ Secure API Key
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 st.set_page_config(page_title="AI Assistant", layout="centered")
 
@@ -44,7 +45,7 @@ if st.button("Submit"):
         """
 
         try:
-            response = openai.ChatCompletion.create(
+            response = client.chat.completions.create(
                 model="gpt-4o-mini",
                 messages=[
                     {"role": "system", "content": "You are a helpful AI assistant."},
@@ -53,7 +54,7 @@ if st.button("Submit"):
                 temperature=0.7
             )
 
-            answer = response['choices'][0]['message']['content']
+            answer = response.choices[0].message.content
 
             st.success("✅ Response:")
             st.write(answer)
